@@ -1,0 +1,205 @@
+@page "/tm-stmt-runs"
+
+<PageTitle>TmStmtRuns</PageTitle>
+<div class="row" style="margin-bottom: 1rem">
+    <div class="col-12 col-md-6">
+        <RadzenText Text="TmStmtRuns" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+    </div>
+    <div class="col-12 col-md-6 justify-content-start justify-content-md-end" style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem">
+    <RadzenSplitButton Icon="get_app" style="margin-left: 10px; margin-bottom: 10px" Text="Export" Click="@ExportClick" Variant="Variant.Flat" Shade="Shade.Lighter">
+        <RadzenSplitButtonItem Text="Excel" Value="xlsx" />
+        <RadzenSplitButtonItem Text="CSV" Value="csv" />
+    </RadzenSplitButton>
+    <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+    <RadzenCard style="height: 100%">
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true"
+            Data="@tmStmtRuns"    TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" >
+            <Columns>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="EventKey" Title="Event Key">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="Session" Title="Session">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="EventTime" Title="Event Time">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="Reason" Title="Reason">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="ProcName" Title="Proc Name">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="ProcVer" Title="Proc Ver">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="ProcNestlevel" Title="Proc Nestlevel">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="ProcRunKey" Title="Proc Run Key">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="ProcessType" Title="Process Type">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="ProcessKey" Title="Process Key">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="StmtAction" Title="Stmt Action">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="ErrDescr" Title="Err Descr">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="EventError" Title="Event Error">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="EventRowcount" Title="Event Rowcount">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="EventIdentity" Title="Event Identity">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Property="Params" Title="Params">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="tmStmtRun">
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </RadzenCard>
+    </div>
+        <div class="col-md-6">
+        <RadzenCard style="height: 100%;margin-top:0px;">
+            <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save TmStmtRun</RadzenAlert>
+            <RadzenTemplateForm TItem="IDEASRadzenGrid.Models.EAI1333_IDEAS.TmStmtRun" Data="@tmStmtRun" Visible="@(tmStmtRun != null)" Submit="@FormSubmit">
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Event Key" Component="EventKey" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@tmStmtRun.EventKey" Name="EventKey" />
+                        <RadzenRequiredValidator Component="EventKey" Text="EventKey is required" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Session" Component="Session" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@tmStmtRun.Session" Name="Session" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Event Time" Component="EventTime" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@tmStmtRun.EventTime" Name="EventTime" />
+                        <RadzenRequiredValidator Component="EventTime" Text="EventTime is required" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Reason" Component="Reason" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@tmStmtRun.Reason" Name="Reason" />
+                        <RadzenRequiredValidator Component="Reason" Text="Reason is required" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Proc Name" Component="ProcName" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@tmStmtRun.ProcName" Name="ProcName" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Proc Ver" Component="ProcVer" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@tmStmtRun.ProcVer" Name="ProcVer" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Proc Nestlevel" Component="ProcNestlevel" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@tmStmtRun.ProcNestlevel" Name="ProcNestlevel" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Proc Run Key" Component="ProcRunKey" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@tmStmtRun.ProcRunKey" Name="ProcRunKey" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Process Type" Component="ProcessType" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@tmStmtRun.ProcessType" Name="ProcessType" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Process Key" Component="ProcessKey" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@tmStmtRun.ProcessKey" Name="ProcessKey" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Stmt Action" Component="StmtAction" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@tmStmtRun.StmtAction" Name="StmtAction" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Err Descr" Component="ErrDescr" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@tmStmtRun.ErrDescr" Name="ErrDescr" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Event Error" Component="EventError" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@tmStmtRun.EventError" Name="EventError" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Event Rowcount" Component="EventRowcount" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@tmStmtRun.EventRowcount" Name="EventRowcount" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Event Identity" Component="EventIdentity" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@tmStmtRun.EventIdentity" Name="EventIdentity" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Params" Component="Params" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@tmStmtRun.Params" Name="Params" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-end" style="margin-top: 1rem">
+                        <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Style="margin-right: 0.5rem" Variant="Variant.Flat" />
+                        <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick" Visible=false />
+                    </div>
+                </div>
+            </RadzenTemplateForm>
+        </RadzenCard>
+        </div></div>
